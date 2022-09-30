@@ -59,9 +59,59 @@ var movies = [
 ];
 
 // create showMovies function
+const allMoviesDiv = document.querySelector("#all-movies");
 
+function showMovies(){
+  movies.forEach(movie => {
+    const newMovie = document.createElement('p');
+    newMovie.innerHTML = `${movie.title} - ${movie.director}`;
+    allMoviesDiv.appendChild(newMovie);
+  });
+  document.getElementById('movies-number').innerText = Object.keys(movies).length;
+}
+
+// showMovies(movies);
+const myTimeout = setTimeout(showMovies, 5000);
 
 // create a new movie object for your favorite movie
-
+const newMovie = {
+  title: "Mamma Mia",
+  director: "Phyllida Lloyd",
+  type: "musical",
+  haveWatched: true
+}
 
 // create addMovies function
+function addMovie(newMovie){
+  setTimeout(movies.push(newMovie), 2000);
+}
+addMovie(newMovie)
+
+//Task 4
+const main = document.querySelector("#main");
+const newForm = document.createElement("form");
+main.appendChild(newForm);
+const inputTitle = document.createElement("input");
+// inputTitle.setAttribute("value", "Title");
+const inputDirector = document.createElement("input");
+const inputType = document.createElement("input");
+const inputWatched = document.createElement("input");
+const saveButton = document.createElement("button");
+saveButton.id = "button"
+saveButton.innerHTML = "SAVE"
+newForm.appendChild(inputTitle);
+newForm.appendChild(inputDirector);
+newForm.appendChild(inputType);
+newForm.appendChild(inputWatched);
+newForm.appendChild(saveButton);
+
+document.querySelector("#button").addEventListener("click", addUserMovie);
+function addUserMovie(inputTitle, inputDirector, inputType, inputWatched){
+  userMovie.title = document.querySelector(inputTitle).value;
+  userMovie.director = document.querySelector(inputDirector).value;
+  userMovie.type = document.querySelector(inputType).value;
+  userMovie.watched = document.querySelector(inputWatched).value;
+  const userMovie = {}
+  addMovie(userMovie)
+  showMovies(movies)
+}
