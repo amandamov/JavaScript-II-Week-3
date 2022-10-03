@@ -63,15 +63,16 @@ const allMoviesDiv = document.querySelector("#all-movies");
 
 function showMovies(){
   movies.forEach(movie => {
-    const newMovie = document.createElement('p');
-    newMovie.innerHTML = `${movie.title} - ${movie.director}`;
-    allMoviesDiv.appendChild(newMovie);
+    const screenMovie = document.createElement('p');
+    screenMovie.classList.add("mystyle");
+    screenMovie.innerHTML = `${movie.title} - ${movie.director}`;
+    allMoviesDiv.appendChild(screenMovie);
   });
   document.getElementById('movies-number').innerText = Object.keys(movies).length;
+
 }
 
-// showMovies(movies);
-const myTimeout = setTimeout(showMovies, 5000);
+const myTimeout = setTimeout(showMovies, 1000);
 
 // create a new movie object for your favorite movie
 const newMovie = {
@@ -81,18 +82,24 @@ const newMovie = {
   haveWatched: true
 }
 
+let myPs = document.querySelectorAll(".mystyle");
+
 // create addMovies function
 function addMovie(newMovie){
-  setTimeout(movies.push(newMovie), 2000);
+  setTimeout(() => {
+    myPs.forEach(el => el.innerHTML = " ");
+    movies.push(newMovie);
+    showMovies();
+  }, 2000);
 }
-addMovie(newMovie)
+
+addMovie(newMovie);
 
 //Task 4
 const main = document.querySelector("#main");
 const newForm = document.createElement("form");
 main.appendChild(newForm);
 const inputTitle = document.createElement("input");
-// inputTitle.setAttribute("value", "Title");
 const inputDirector = document.createElement("input");
 const inputType = document.createElement("input");
 const inputWatched = document.createElement("input");
@@ -105,13 +112,14 @@ newForm.appendChild(inputType);
 newForm.appendChild(inputWatched);
 newForm.appendChild(saveButton);
 
+const userMovie = {}
 document.querySelector("#button").addEventListener("click", addUserMovie);
-function addUserMovie(inputTitle, inputDirector, inputType, inputWatched){
+function addUserMovie(title, director, type, watched){
   userMovie.title = document.querySelector(inputTitle).value;
   userMovie.director = document.querySelector(inputDirector).value;
   userMovie.type = document.querySelector(inputType).value;
   userMovie.watched = document.querySelector(inputWatched).value;
-  const userMovie = {}
+  
   addMovie(userMovie)
   showMovies(movies)
 }

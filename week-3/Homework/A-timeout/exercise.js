@@ -16,15 +16,13 @@ Update your code to make the colour change every 5 seconds to something differen
 //   document.querySelector("body").style.backgroundColor = "#7FFFD4"
 // }
 
-const colors = ["red", "green", "pink"]
+let i = 0; 
+const colors = ["red", "green", "pink"];
+const body = document.querySelector("body");
+body.style.backgroundColor = "#7FFFD4";
 
 function changeEvery5sec(){
-    for (let i = 0; i < colors.length; i++) {
-        document.querySelector("body").style.backgroundColor = colors[i]
-        if (i == colors.length) {
-            i = 0
-        }
-    }
+     body.style.backgroundColor = colors[i];
+     i = (i + 1) % colors.length;
 }
-const newStyle = setInterval(changeEvery5sec, 3000);
-
+const newStyle = setInterval(changeEvery5sec, 5000);
